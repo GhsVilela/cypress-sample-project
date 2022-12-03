@@ -102,3 +102,16 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Dependency directory
+node_modules
+
+#Generated files
+cypress/screenshots
+cypress/videos
+cypress/report
+cypress/downloads
+mochawesome-report/
+cypress/tests/tmp
+.env
