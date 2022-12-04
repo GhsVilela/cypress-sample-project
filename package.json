@@ -17,6 +17,7 @@
   "scripts": {
     "cy-verify": "cypress verify",
     "cy-info": "cypress info",
+    "cy-all": "env-cmd cross-env-shell \"npx cypress run --reporter mochawesome --browser $BROWSER_NAME\"",
     "cy-login": "env-cmd cross-env-shell \"npx cypress run --reporter mochawesome --browser $BROWSER_NAME --spec cypress/tests/examples/ui/login.spec.js\"",
     "create-env-github": "envsub --env BROWSER_NAME=$BROWSER_NAME --env BASE_WEB_URL=$BASE_WEB_URL --env LOGIN_PASSWORD=$LOGIN_PASSWORD .env.template .env"
   },
