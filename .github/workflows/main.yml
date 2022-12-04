@@ -1,4 +1,4 @@
-name: test
+name: Cypress tests
 on:
   push:
     branches:
@@ -40,6 +40,7 @@ jobs:
           path: cypress/cache
           key: cypress-binary-${{ hashFiles('package-lock.json') }}
   test:
+    needs: install
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:node16.16.0-chrome107-ff107-edge
