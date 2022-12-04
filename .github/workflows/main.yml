@@ -19,13 +19,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-      - run: npm ci --no-fund
-      - run: npx cypress cache path
-      - run: npx cypress cache list
-      - run: npm run cy-verify
-      - run: npm run cy-info
-      - run: npm run create-env-github && cat .env ; echo
-      - run: mkdir -p mochawesome-report && npm run
+        run: |
+          npm ci --no-fund
+          npx cypress cache path
+          npx cypress cache list
+          npm run cy-verify
+          npm run cy-info
+          npm run create-env-github && cat .env ; echo
+          mkdir -p mochawesome-report && npm run
 
       - name: Cache NPM
         id: cache-npm
