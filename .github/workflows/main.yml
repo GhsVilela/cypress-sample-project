@@ -33,6 +33,7 @@ jobs:
           path: |
             ~/.cache/Cypress
             node_modules
+            .env
           key: cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
   test:
     needs: install
@@ -41,6 +42,8 @@ jobs:
       image: cypress/browsers:node16.16.0-chrome107-ff107-edge
       options: --user 1001
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Run tests
         run: npm run cy-all
       - name: Upload artifacts
