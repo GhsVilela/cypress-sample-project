@@ -44,6 +44,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Cache NPM and Cypress
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+            .env
+          key: cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Run tests
         run: npm run cy-all
       - name: Upload artifacts
