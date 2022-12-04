@@ -27,18 +27,13 @@ jobs:
           npm run cy-info
           npm run create-env-github && cat .env ; echo
           mkdir -p mochawesome-report && npm run
-      - name: Cache Node Modules
-        id: cache-node-modules
+      - name: Cache NPM and Cypress
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
-      - name: Cache Cypress Binary
-        id: cache-cypress-binary
-        uses: actions/cache@v3
-        with:
-          path: cypress/cache
-          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
   test:
     needs: install
     runs-on: ubuntu-latest
@@ -48,3 +43,13 @@ jobs:
     steps:
       - name: Run tests
         run: npm run cy-all
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-evidences
+          path: |
+            cypress/videos/**/*.mp4
+            cypress/screenshots/**/*.png
+            mochawesome-report/
+          retention-days: 1
