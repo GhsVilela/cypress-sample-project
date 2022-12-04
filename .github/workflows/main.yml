@@ -10,7 +10,7 @@ env:
   LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
 
 jobs:
-  install:
+  test:
     runs-on: ubuntu-latest
     container:
       image: cypress/browsers:node16.16.0-chrome107-ff107-edge
@@ -47,10 +47,6 @@ jobs:
         with:
           path: cypress/cache
           key: cypress-binary-${{ hashFiles('package-lock.json') }}
-  test:
-    runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node16.16.0-chrome107-ff107-edge
-    steps:
+
       - name: Run tests
-      - run: npm run cy-login
+        run: npm run cy-login
