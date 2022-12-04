@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - main
+
+env:
+  BROWSER_NAME: ${{ secrets.BROWSER_NAME }}
+  BASE_WEB_URL: ${{ secrets.BASE_WEB_URL }}
+  LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -21,10 +27,32 @@ jobs:
       - run: npm run create-env-github && cat .env ; echo
       - run: mkdir -p mochawesome-report && npm run
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
+      - name: Cache NPM
+        id: cache-npm
+        uses: actions/cache@v3
         with:
-          name: build
-          if-no-files-found: error
-          path: build
-          retention-days: 1
+          path: npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Cache Cypress Binary
+        id: cache-cypress-binary
+        uses: actions/cache@v3
+        with:
+          path: cypress/cache
+          key: cypress-binary-${{ hashFiles('package-lock.json') }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome107-ff107-edge
+    steps:
+      - name: Run tests
+      - run: npm run cy-login
