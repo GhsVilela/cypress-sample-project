@@ -47,8 +47,6 @@ jobs:
         with:
           path: cypress/cache
           key: cypress-binary-${{ hashFiles('package-lock.json') }}
-
-jobs:
   test:
     runs-on: ubuntu-latest
     container:
