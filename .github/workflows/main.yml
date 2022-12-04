@@ -1,0 +1,30 @@
+name: test
+on:
+  push:
+    branches:
+      - main
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome107-ff107-edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+      - run: npm ci --no-fund
+      - run: npx cypress cache path
+      - run: npx cypress cache list
+      - run: npm run cy-verify
+      - run: npm run cy-info
+      - run: npm run create-env-github && cat .env ; echo
+      - run: mkdir -p mochawesome-report && npm run
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+          retention-days: 1
