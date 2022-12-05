@@ -13,7 +13,7 @@ on:
         required: false
         type: string
   schedule:
-    - cron:  '26 2 * * *'
+    - cron:  '*/5 * * * *'
 
 env:
   BROWSER_NAME: ${{ inputs.BROWSER_NAME }}
