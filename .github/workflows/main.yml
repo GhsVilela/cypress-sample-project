@@ -12,8 +12,6 @@ on:
         default: 'https://www.saucedemo.com'
         required: false
         type: string
-  schedule:
-    - cron:  '*/5 * * * *'
 
 env:
   BROWSER_NAME: ${{ inputs.BROWSER_NAME }}
