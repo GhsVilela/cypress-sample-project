@@ -8,6 +8,9 @@ module.exports = defineConfig({
       return dotenvPlugin(config, dotenv, true)
     },
     specPattern: "cypress/tests/examples/**/*.spec.{js,jsx,ts,tsx}",
-    supportFile: "cypress/support/e2e.js"
+    supportFile: "cypress/support/e2e.js",
+    chromeWebSecurity: false,
+    viewportWidth: 1280,
+    viewportHeight: 720
   },
 });
