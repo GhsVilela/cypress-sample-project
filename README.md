@@ -1,6 +1,7 @@
 # Cypress Sample Project
 
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+[![Cypress tests](https://github.com/GhsVilela/cypress-sample-project/actions/workflows/main.yml/badge.svg)](https://github.com/GhsVilela/cypress-sample-project/actions/workflows/main.yml)
 
 ## Contents
 
